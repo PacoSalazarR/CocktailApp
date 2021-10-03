@@ -1,7 +1,11 @@
 package com.amalip.cocktailapp.presentation.cocktails
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+//import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import com.amalip.cocktailapp.R
 import com.amalip.cocktailapp.core.extension.failure
@@ -53,6 +57,23 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
     override fun setBinding(view: View) {
         binding = CocktailFragmentBinding.bind(view)
+
+        binding.svCocktail.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(p0: String?): Boolean {
+                cocktailViewModel.apply {
+                    doGetCocktailsByName(p0!!)
+                }
+                return true
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                cocktailViewModel.apply {
+                    doGetCocktailsByName(p0!!)
+                }
+                return true
+            }
+
+        })
 
         binding.lifecycleOwner = this
     }

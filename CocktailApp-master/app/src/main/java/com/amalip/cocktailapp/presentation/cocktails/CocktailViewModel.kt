@@ -1,5 +1,6 @@
 package com.amalip.cocktailapp.presentation.cocktails
 
+import androidx.databinding.BindingAdapter
 import com.amalip.cocktailapp.core.presentation.BaseViewModel
 import com.amalip.cocktailapp.domain.usecase.GetCocktailsByName
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,9 +9,9 @@ import javax.inject.Inject
 
 @DelicateCoroutinesApi
 @HiltViewModel
+
 class CocktailViewModel @Inject constructor(private val getCocktailsByName: GetCocktailsByName) :
     BaseViewModel() {
-
     fun doGetCocktailsByName(name: String) {
         getCocktailsByName(name) {
             it.fold(::handleFailure) {
