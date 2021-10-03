@@ -7,6 +7,8 @@ import android.view.View
 //import android.widget.SearchView
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.amalip.cocktailapp.R
 import com.amalip.cocktailapp.core.extension.failure
 import com.amalip.cocktailapp.core.extension.observe
@@ -26,7 +28,7 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
     private lateinit var binding: CocktailFragmentBinding
 
     private lateinit var adapter: CocktailAdapter
-    private lateinit var rowAdapter: CocktailGridAdapter
+    private lateinit var gridAdapter: CocktailGridAdapter
     private val cocktailViewModel by viewModels<CocktailViewModel>()
     private var flag: Boolean = false
 
@@ -49,10 +51,10 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
     private fun setUpAdapter(cocktails: List<Cocktail>) {
         adapter = CocktailAdapter()
-        rowAdapter = CocktailGridAdapter()
+        gridAdapter = CocktailGridAdapter()
 
         adapter.addData(cocktails)
-        rowAdapter.addData(cocktails)
+        gridAdapter.addData(cocktails)
 
         binding.rcCocktails.apply {
             adapter = this@CocktailFragment.adapter
@@ -64,11 +66,13 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
         binding.btnChangeView.setOnClickListener {
             if(!flag){
+                binding.rcCocktails.layoutManager = GridLayoutManager(requireContext(),3)
                 binding.rcCocktails.apply {
-                    adapter = this@CocktailFragment.rowAdapter
+                    adapter = this@CocktailFragment.gridAdapter
                 }
                 flag = true
             }else{
+                binding.rcCocktails.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
                 binding.rcCocktails.apply {
                     adapter = this@CocktailFragment.adapter
                 }
