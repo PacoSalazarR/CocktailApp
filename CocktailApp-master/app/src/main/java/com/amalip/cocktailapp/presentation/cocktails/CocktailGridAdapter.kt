@@ -8,12 +8,7 @@ import com.amalip.cocktailapp.databinding.RowCocktailBinding
 import com.amalip.cocktailapp.databinding.GridCocktailBinding
 import com.amalip.cocktailapp.domain.model.Cocktail
 
-/**
- * Created by Amalip on 9/29/2021.
- */
-
-class CocktailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class CocktailGridAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var list: MutableList<Cocktail> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -24,8 +19,9 @@ class CocktailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolderItem(
-        RowCocktailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-    )
+            GridCocktailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         (holder as ViewHolderItem).bind(
@@ -34,13 +30,11 @@ class CocktailAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = list.size
 
-
-    class ViewHolderItem(private val binding: RowCocktailBinding) :
+    class ViewHolderItem(private val binding: GridCocktailBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Cocktail) {
             binding.item = data
         }
     }
-
 }

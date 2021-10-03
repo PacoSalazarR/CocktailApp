@@ -26,7 +26,9 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
     private lateinit var binding: CocktailFragmentBinding
 
     private lateinit var adapter: CocktailAdapter
+    private lateinit var rowAdapter: CocktailGridAdapter
     private val cocktailViewModel by viewModels<CocktailViewModel>()
+    private var flag: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +49,10 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
     private fun setUpAdapter(cocktails: List<Cocktail>) {
         adapter = CocktailAdapter()
+        rowAdapter = CocktailGridAdapter()
 
         adapter.addData(cocktails)
+        rowAdapter.addData(cocktails)
 
         binding.rcCocktails.apply {
             adapter = this@CocktailFragment.adapter
@@ -57,6 +61,21 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
     override fun setBinding(view: View) {
         binding = CocktailFragmentBinding.bind(view)
+
+        binding.btnChangeView.setOnClickListener {
+            if(!flag){
+                binding.rcCocktails.apply {
+                    adapter = this@CocktailFragment.rowAdapter
+                }
+                flag = true
+            }else{
+                binding.rcCocktails.apply {
+                    adapter = this@CocktailFragment.adapter
+                }
+                flag = false
+            }
+
+        }
 
         binding.svCocktail.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(p0: String?): Boolean {

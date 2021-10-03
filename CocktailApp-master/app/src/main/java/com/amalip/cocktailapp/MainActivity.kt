@@ -32,8 +32,10 @@ class MainActivity : BaseActivity() {
         binding.progressView.isVisible = show
     }
 
+
     override fun setBinding() {
         binding = DataBindingUtil.setContentView(this, layoutId())
+
     }
 
 
