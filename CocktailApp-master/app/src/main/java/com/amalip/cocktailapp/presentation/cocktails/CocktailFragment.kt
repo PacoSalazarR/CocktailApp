@@ -82,17 +82,22 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
         }
 
         binding.svCocktail.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextChange(p0: String?): Boolean {
+                binding.rcCocktails.layoutManager = LinearLayoutManager(requireContext())
                 cocktailViewModel.apply {
                     doGetCocktailsByName(p0!!)
                 }
+                flag = false
                 return true
             }
 
             override fun onQueryTextSubmit(p0: String?): Boolean {
+                binding.rcCocktails.layoutManager = LinearLayoutManager(requireContext())
                 cocktailViewModel.apply {
                     doGetCocktailsByName(p0!!)
                 }
+                flag = false
                 return true
             }
 
