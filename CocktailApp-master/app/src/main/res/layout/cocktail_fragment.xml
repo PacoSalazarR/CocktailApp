@@ -35,12 +35,18 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcCocktails"
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_height="0dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:itemCount="10"
                 tools:listitem="@layout/grid_cocktail" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <include
+            android:id="@+id/emptyView"
+            layout="@layout/empty_view"
+            android:visibility="visible"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

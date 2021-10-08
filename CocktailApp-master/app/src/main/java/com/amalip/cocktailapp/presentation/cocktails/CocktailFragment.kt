@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.View
 //import android.widget.SearchView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,6 +51,8 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
     }
 
     private fun setUpAdapter(cocktails: List<Cocktail>) {
+        binding.emptyView.isVisible = cocktails.isEmpty()
+
         adapter = CocktailAdapter()
         gridAdapter = CocktailGridAdapter()
 
@@ -57,6 +60,7 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
         gridAdapter.addData(cocktails)
 
         binding.rcCocktails.apply {
+            isVisible = cocktails.isNotEmpty()
             adapter = this@CocktailFragment.adapter
         }
     }
@@ -105,6 +109,5 @@ class CocktailFragment : BaseFragment(R.layout.cocktail_fragment) {
 
         binding.lifecycleOwner = this
     }
-
 
 }
